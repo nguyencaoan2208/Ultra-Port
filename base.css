@@ -18,6 +18,7 @@ body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  scroll-behavior: smooth;
 }
 
 h1, h2 {
@@ -97,6 +98,7 @@ h1, h2 {
   background: rgba(255,255,255,0.35);
   overflow: hidden;
   border-radius: 2px;
+  display: none;
 }
 
 .progress-line {
