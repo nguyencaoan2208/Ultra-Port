@@ -1,0 +1,146 @@
+/* ================= RESET + BODY ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100svh; /* fix vh mobile */
+  background-color: antiquewhite;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1, h2 {
+  font-weight: 600;
+}
+
+/* ================= VIDEO SECTION ================= */
+
+.video-sequence-section {
+  width: 100%;
+  height: 100svh; /* chuẩn mobile */
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Video */
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+
+/* Overlay chính */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.35)
+  );
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Title */
+.video-overlay h2 {
+  font-size: clamp(28px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ================= VIDEO CONTROL ================= */
+
+.video-control {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 32px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  max-width: 560px;
+  height: 3px;
+  background: rgba(255,255,255,0.35);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.progress-line {
+  height: 100%;
+  width: 0%;
+  background: #db4444;
+  transition: width 0.08s linear;
+}
+
+/* Pagination */
+.video-pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-dot {
+  width: 26px;
+  height: 2px;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.pagination-dot.active {
+  background: #fff;
+  transform: scaleX(1.4);
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .video-control {
+    bottom: 24px;
+  }
+
+  .progress-bar {
+    max-width: 260px;
+  }
+
+  .video-pagination {
+    gap: 8px;
+  }
+
+  .pagination-dot {
+    width: 22px;
+  }
+}

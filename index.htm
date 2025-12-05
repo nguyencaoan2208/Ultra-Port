@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="site-header" id="siteHeader">
+  <div class="header-container">
+    
+    <!-- Logo -->
+    <a href="#" class="logo">
+      WebStudio
+    </a>
+
+    <!-- Menu Desktop -->
+    <nav class="main-nav">
+      <a href="#services">Dịch vụ</a>
+      <a href="#projects">Dự án</a>
+      <a href="#process">Quy trình</a>
+      <a href="#pricing">Báo giá</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
+
+    <!-- CTA -->
+    <a href="#contact" class="header-cta">Nhận báo giá</a>
+
+    <!-- Mobile Toggle -->
+    <div class="menu-toggle" id="menuToggle">
+      ☰
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Dịch vụ</a>
+    <a href="#projects">Dự án</a>
+    <a href="#process">Quy trình</a>
+    <a href="#pricing">Báo giá</a>
+    <a href="#contact">Liên hệ</a>
+  </div>
+</header>
+
+<!-- Chặn nội dung bị header che -->
+<div class="header-spacer"></div>
+<script>
+  const toggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  toggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+  });
+
+  // Click link thì tự đóng menu
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+    });
+  });
+</script>
+
+
+
+    <!-- Video banner -->
+        <section class="video-sequence-section">
+  <div class="video-wrapper">
+  <video id="videoSequence" autoplay muted playsinline></video>
+
+  <!-- Lớp chuyển cảnh mượt -->
+  <div class="video-transition" id="videoTransition"></div>
+
+  <div class="video-overlay">
+    <h2 id="videoTitle"></h2>
+
+    <div class="video-control">
+      <div class="progress-bar">
+        <div class="progress-line" id="progressLine"></div>
+      </div>
+      <div class="video-pagination" id="videoPagination"></div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<script>
+  const MAX_DURATION = 15;
+
+  const videoData = [
+    { src: "video-banner-1.mp4", title: "Solution Design" },
+    { src: "video-banner-2.mp4", title: "Built it" },
+    { src: "video-banner-3.mp4", title: "Ready for using" }
+  ];
+
+  let currentIndex = 0;
+  let forceTimer = null;
+
+  const player = document.getElementById("videoSequence");
+  const titleEl = document.getElementById("videoTitle");
+  const progressLine = document.getElementById("progressLine");
+  const pagination = document.getElementById("videoPagination");
+  const transitionLayer = document.getElementById("videoTransition");
+
+  // Tạo pagination
+  videoData.forEach((_, index) => {
+    const dot = document.createElement("span");
+    dot.className = "pagination-dot";
+    dot.addEventListener("click", () => {
+      currentIndex = index;
+      playVideoByIndex();
+    });
+    pagination.appendChild(dot);
+  });
+
+  function updatePagination() {
+    document.querySelectorAll(".pagination-dot").forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentIndex);
+    });
+  }
+
+  function playVideoByIndex() {
+    clearTimeout(forceTimer);
+
+    transitionLayer.classList.add("active");
+    player.style.opacity = 0;
+
+    setTimeout(() => {
+      const current = videoData[currentIndex];
+
+      player.src = current.src;
+      titleEl.textContent = current.title;
+      progressLine.style.width = "0%";
+
+      updatePagination();
+      player.load();
+      player.play();
+
+      setTimeout(() => {
+        transitionLayer.classList.remove("active");
+        player.style.opacity = 1;
+      }, 200);
+    }, 350);
+
+    forceTimer = setTimeout(nextVideo, MAX_DURATION * 1000);
+  }
+
+  function nextVideo() {
+    currentIndex = (currentIndex + 1) % videoData.length;
+    playVideoByIndex();
+  }
+
+  player.addEventListener("timeupdate", () => {
+    const progress = (player.currentTime / MAX_DURATION) * 100;
+    progressLine.style.width = Math.min(progress, 100) + "%";
+  });
+
+  player.addEventListener("ended", () => {
+    nextVideo();
+  });
+
+  playVideoByIndex();
+</script>
+
+
+
+    </body>
+</html>
