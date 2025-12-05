@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="base.css">
         <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="solution.css">
         <link rel="stylesheet" href="scroll-text.css">
         <link rel="stylesheet" href="main.css">
 
@@ -168,14 +169,7 @@
 </script>
 
 <!-- Scroll Text Section -->
-<section class="scroll-text-section">
-  <div class="scroll-text-wrapper">
-    <div class="scroll-text">TEXT 1</div>
-    <div class="scroll-text">TEXT 2</div>
-    <div class="scroll-text">TEXT 3</div>
-    <div class="scroll-text">TEXT 4</div>
-  </div>
-</section>
+
 
 <!-- Scroll Text Section -->
  <section class="scroll-text-section" id="scrollTextSection">
@@ -187,107 +181,36 @@
   </div>
 </section>
 
-<script>
-  const SCROLL_DELAY = 600; // chỉnh thời gian đứng giữa mỗi text (ms)
 
-  document.querySelectorAll(".scroll-text-section").forEach((section) => {
-    const texts = section.querySelectorAll(".scroll-text");
+<section class="service-preview-section" id="solution">
+  <div class="service-container">
 
-    let currentTextIndex = -1;
-    let isLocked = false;
-    let startY = 0;
+    <!-- LEFT -->
+    <div class="service-list-wrap">
+      <h2 class="service-heading">HOW WE CAN<br>HELP YOU</h2>
 
-    function updateStack() {
-      texts.forEach((el, i) => {
-        el.classList.remove("show", "old");
+      <div class="service-list" id="serviceList">
+        <a href="#" class="service-item active" data-image="solution-image-1.jpg">FULL WEBSITE</a>
+        <a href="#" class="service-item" data-image="solution-image-2.jpg">SHOPIFY UX/UI & DESIGN</a>
+        <a href="#" class="service-item" data-image="solution-image-4.gif">READY-TO-USE SHOPIFY SECTIONS</a>
+        <a href="#" class="service-item" data-image="solution-image-1.jpg">SHOPIFY FUNCTION</a>
+        <a href="#" class="service-item" data-image="solution-image-2.jpg">3D-DEMONSTRATE CUSTOM PRODUCTS</a>
+        <a href="#" class="service-item" data-image="solution-image-3.webp">IMPROVE CONVERSION RATE</a>
+        
+      </div>
 
-        if (i < currentTextIndex) el.classList.add("old");
-        if (i === currentTextIndex) el.classList.add("show");
-      });
-    }
+      <div class="fade-top"></div>
+      <div class="fade-bottom"></div>
+    </div>
 
-    // ✅ Kiểm tra section có đang thực sự trong viewport không (>= 60%)
-    function isSectionActive() {
-      const rect = section.getBoundingClientRect();
-      const viewHeight = window.innerHeight || document.documentElement.clientHeight;
+    <!-- RIGHT -->
+    <div class="service-image-wrap">
+      <img id="servicePreviewImage" src="solution-image-2.jpg" alt="">
+    </div>
 
-      const visibleHeight =
-        Math.min(rect.bottom, viewHeight) - Math.max(rect.top, 0);
-
-      return visibleHeight / rect.height >= 0.6;
-    }
-
-    function canControl(direction) {
-      // ở text cuối, scroll xuống → cho thoát
-      if (direction === "down" && currentTextIndex >= texts.length - 1) return false;
-
-      // ở text đầu, scroll lên → cho thoát
-      if (direction === "up" && currentTextIndex <= -1) return false;
-
-      return isSectionActive();
-    }
-
-    function handleWheel(e) {
-      const direction = e.deltaY > 0 ? "down" : "up";
-
-      if (!canControl(direction)) return;
-
-      e.preventDefault();
-      if (isLocked) return;
-      isLocked = true;
-
-      if (direction === "down" && currentTextIndex < texts.length - 1) {
-        currentTextIndex++;
-      } 
-      else if (direction === "up" && currentTextIndex >= 0) {
-        currentTextIndex--;
-      }
-
-      updateStack();
-
-      setTimeout(() => {
-        isLocked = false;
-      }, SCROLL_DELAY);
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    // ===== MOBILE TOUCH =====
-    section.addEventListener("touchstart", (e) => {
-      startY = e.touches[0].clientY;
-    }, { passive: true });
-
-    section.addEventListener("touchmove", (e) => {
-      if (isSectionActive()) e.preventDefault();
-    }, { passive: false });
-
-    section.addEventListener("touchend", (e) => {
-      const endY = e.changedTouches[0].clientY;
-      const diff = startY - endY;
-
-      if (Math.abs(diff) < 50) return;
-
-      const direction = diff > 0 ? "down" : "up";
-      if (!canControl(direction)) return;
-
-      if (isLocked) return;
-      isLocked = true;
-
-      if (direction === "down" && currentTextIndex < texts.length - 1) {
-        currentTextIndex++;
-      } 
-      else if (direction === "up" && currentTextIndex >= 0) {
-        currentTextIndex--;
-      }
-
-      updateStack();
-
-      setTimeout(() => {
-        isLocked = false;
-      }, SCROLL_DELAY);
-    });
-  });
-</script>
+  </div>
+</section>
+<section></section>
 
 
 <script src="script.js"></script>

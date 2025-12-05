@@ -18,6 +18,7 @@
   justify-content: flex-end;
   /* padding-bottom: 120px; */
   gap: 8px;
+  overflow: hidden;
 }
 
 /* Mỗi dòng text */
@@ -38,14 +39,12 @@
 .scroll-text:first-child{
     opacity: 1;
   transform: translateY(0);
-  filter: drop-shadow(white 0 0 10px);
 }
 
 /* Text được hiển thị */
 .scroll-text.show {
   opacity: 1;
   transform: translateY(0);
-  filter: drop-shadow(white 0 0 10px);
 }
 
 /* Text cũ chỉ bị đôn lên – KHÔNG MỜ */

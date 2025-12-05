@@ -1,0 +1,122 @@
+.service-preview-section {
+  width: 100%;
+  height: 100vh;
+  background: #000000;
+  padding: 120px 60px;
+  box-sizing: border-box;
+}
+
+.service-container {
+  width: 100%; height: 100%;
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center; box-sizing: border-box;
+}
+
+/* LEFT */
+.service-heading {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 700;
+  margin-bottom: 48px;
+  color: #ffffff;
+}
+
+.service-list-wrap {
+  position: relative;
+}
+
+.service-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  scroll-behavior: smooth;
+}
+
+/* LINK ITEM */
+.service-item {
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: 0.3s;
+}
+
+.service-item:hover,
+.service-item.active {
+  color: #ffffff;             /* ✅ màu đỏ bạn đang dùng toàn site */
+  border-color: #ffffff;
+  opacity: 1;
+}
+
+/* Fade trên dưới */
+.fade-top,
+.fade-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, #000000, transparent);
+}
+
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, #000000, transparent);
+}
+
+/* RIGHT */
+.service-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MOBILE: TRƯỢT NGANG */
+@media (max-width: 768px) {
+  .service-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .service-list {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: unset;
+  }
+
+  .service-item {
+    min-width: 240px;
+    border-bottom: none;
+    border-right: 1px solid rgba(0,0,0,0.3);
+    padding: 0 20px 0 0;
+  }
+
+  .fade-top,
+  .fade-bottom {
+    display: none;
+  }
+}
